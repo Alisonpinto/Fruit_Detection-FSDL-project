@@ -9,7 +9,7 @@ load_dotenv()
 
 def load_model(app):
     """Load the TensorFlow model once at startup."""
-    model_path = os.path.join(os.getcwd(), 'models', 'fruit_model.h5')
+    model_path = os.path.join(os.path.dirname(__file__), 'models', 'fruit_detection_model.h5')
     if os.path.exists(model_path):
         try:
             app.model = tf.keras.models.load_model(model_path)
@@ -18,7 +18,7 @@ def load_model(app):
             print(f"Error loading model: {e}")
             app.model = None
     else:
-        print(f"Model file not found at {model_path}. Please place fruit_model.h5 in backend/models/")
+        print(f"Model file not found at {model_path}. Please place fruit_detection_model.h5 in backend/models/")
         app.model = None
 
 def create_app():

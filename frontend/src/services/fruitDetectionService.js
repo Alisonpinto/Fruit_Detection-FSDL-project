@@ -5,7 +5,7 @@
  * Currently using dummy data, will integrate with backend later
  */
 
-const API_BASE_URL = 'http://localhost:8000' // Backend URL
+const API_BASE_URL = 'http://localhost:5000' // Backend URL
 
 /**
  * Upload image and get fruit detection results
@@ -14,19 +14,40 @@ const API_BASE_URL = 'http://localhost:8000' // Backend URL
  */
 export const detectFruits = async (imageFile) => {
   try {
+    // Debug: Check what we're receiving
+    console.log("detectFruits called with:", imageFile)
+    console.log("Type:", typeof imageFile)
+    console.log("Is File?", imageFile instanceof File)
+    console.log("Is Blob?", imageFile instanceof Blob)
+    
+    if (!imageFile) {
+      throw new Error("No image file provided")
+    }
+    
     const formData = new FormData()
     formData.append('file', imageFile)
-
-    const response = await fetch(`${API_BASE_URL}/api/detect`, {
-      method: 'POST',
-      body: formData,
-    })
-
-    if (!response.ok) {
-      throw new Error('Failed to detect fruits')
+    
+    // Debug: Check FormData contents
+    console.log("FormData entries:")
+    for (let [key, value] of formData.entries()) {
+      console.log(`  ${key}:`, value)
     }
 
-    return await response.json()
+    const response = await fetch(`${API_BASE_URL}/predict`, {
+      method: 'POST',
+      body: formData,
+      // Don't set Content-Type header - fetch will set it with boundary
+    })
+
+    const data = await response.json()
+    
+    console.log("API Response:", data)
+
+    if (!response.ok) {
+      throw new Error(data.message || data.error || 'Failed to detect fruits')
+    }
+
+    return data
   } catch (error) {
     console.error('Error in fruit detection:', error)
     throw error

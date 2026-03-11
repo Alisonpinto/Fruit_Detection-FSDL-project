@@ -95,14 +95,14 @@ function ScanPage() {
   }
 
   const handleAnalyze = () => {
-    if (!previewUrl) return
+    if (!imageFile) return
 
     setIsAnalyzing(true)
 
     // Simulate analysis delay
     setTimeout(() => {
       navigate('/result', {
-        state: { image: previewUrl }
+        state: { image: imageFile, previewUrl: previewUrl }
       })
     }, 2500)
   }

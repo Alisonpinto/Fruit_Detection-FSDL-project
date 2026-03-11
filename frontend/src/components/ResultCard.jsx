@@ -32,26 +32,25 @@ function ResultCard({ results, image }) {
                             {results.fruit}
                         </h1>
                         <p className="text-lg font-bold text-primary-green opacity-80 uppercase tracking-widest">
-                            {results.breed}
+                            {results.condition}
                         </p>
                     </div>
 
                     <div className="mb-8">
                         <p className="text-gray-600 leading-relaxed text-lg">
-                            {results.description || "No description available for this fruit."}
+                            {results.description || `Detected ${results.fruit} in ${results.condition} condition.`}
                         </p>
                     </div>
 
                     <div className="flex flex-wrap gap-4 mb-8">
-                        {/* Ready to Eat Badge */}
-                        {results.readyToEat ? (
-                            <span className="px-4 py-1.5 rounded-full text-xs font-bold bg-green-100 text-green-700 uppercase tracking-widest">Ready to Eat</span>
-                        ) : (
-                            <span className="px-4 py-1.5 rounded-full text-xs font-bold bg-gray-100 text-gray-400 uppercase tracking-widest">Not Ready to Eat</span>
-                        )}
-
-                        {/* Market Ready Badge */}
-                        {getMarketStatusBadge(results.marketReady)}
+                        {/* Condition Badge */}
+                        <span className={`px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest ${
+                            results.condition.toLowerCase() === 'good' 
+                                ? 'bg-green-100 text-green-700' 
+                                : 'bg-red-100 text-red-700'
+                        }`}>
+                            {results.condition} Condition
+                        </span>
                     </div>
 
                     <div className="mt-auto pt-6 border-t border-gray-100">
@@ -60,6 +59,7 @@ function ResultCard({ results, image }) {
                         </p>
                     </div>
                 </div>
+
             </div>
         </div>
     );
