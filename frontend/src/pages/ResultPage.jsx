@@ -13,43 +13,31 @@ function ResultPage() {
   const [imageUrl, setImageUrl] = useState(previewUrl)
 
   useEffect(() => {
-    console.log("ResultPage mounted with:", { image, previewUrl })
-    
     if (!image) {
-      console.warn("No image found in location.state")
       navigate('/scan')
       return
     }
 
-    // Create image URL from File object if previewUrl wasn't passed
     if (!imageUrl && image instanceof File) {
       const url = URL.createObjectURL(image)
-      console.log("Created object URL:", url)
       setImageUrl(url)
     }
 
-    // Call backend API with the image file
     const analyzeImage = async () => {
       try {
         setLoading(true)
         setError(null)
-        
-        // Call the service with the actual File object
         const response = await detectFruits(image)
         
-        // Transform response to match ResultCard format
         const formattedResult = {
           fruit: response.fruit,
           condition: response.condition,
           description: `Detected ${response.fruit} in ${response.condition} condition.`,
           confidence: response.confidence
         }
-
-        
         setResult(formattedResult)
       } catch (err) {
         setError(err.message || 'Failed to analyze image. Please try again.')
-        console.error('Analysis error:', err)
       } finally {
         setLoading(false)
       }
@@ -60,86 +48,94 @@ function ResultPage() {
 
   if (!image) return null
 
+  // --- LOADING STATE ---
   if (loading) {
     return (
-      <div className="min-h-screen bg-soft-bg font-sans text-dark-text flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-green mx-auto mb-4"></div>
-          <p className="text-lg font-semibold text-primary-green">Analyzing your fruit...</p>
+      <div className="min-h-screen bg-[#fcfdfc] font-sans flex flex-col items-center justify-center px-6">
+        <div className="relative">
+          <div className="w-24 h-24 border-4 border-emerald-100 border-t-emerald-500 rounded-full animate-spin"></div>
+          <div className="absolute inset-0 flex items-center justify-center">
+             <span className="text-2xl">🌱</span>
+          </div>
         </div>
+        <h2 className="mt-8 text-2xl font-black text-slate-900 tracking-tight">AI is Analyzing</h2>
+        <p className="mt-2 text-slate-400 font-medium animate-pulse">Running neural networks...</p>
       </div>
     )
   }
 
+  // --- ERROR STATE ---
   if (error) {
     return (
-      <div className="min-h-screen bg-soft-bg font-sans text-dark-text pb-12">
-        <nav className="sticky top-0 z-[60] bg-white shadow-sm px-6 py-4 flex items-center mb-10">
-          <Link to="/scan" className="p-2 text-dark-text hover:text-primary-green transition-colors absolute left-6">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+      <div className="min-h-screen bg-[#fcfdfc] font-sans text-slate-800 flex flex-col items-center">
+        <nav className="w-full bg-white/80 backdrop-blur-md border-b border-slate-100 px-6 py-4 flex items-center">
+          <Link to="/scan" className="p-2 text-slate-400 bg-slate-50 rounded-full absolute left-4">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
             </svg>
           </Link>
-          <div className="flex-1 text-center">
-            <span className="text-2xl font-black text-primary-green tracking-tighter">GLENN</span>
-          </div>
+          <div className="flex-1 text-center font-black tracking-tighter text-xl">GLENN<span className="text-emerald-500">.</span>AI</div>
         </nav>
 
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="flex flex-col items-center">
-            <div className="bg-red-50 border border-red-200 rounded-2xl p-6 text-center max-w-lg">
-              <p className="text-red-700 font-semibold mb-2">Error</p>
-              <p className="text-red-600">{error}</p>
-            </div>
-
-            <div className="mt-8 w-full max-w-lg flex flex-col gap-4">
-              <Link to="/scan" className="w-full">
-                <button className="w-full py-4 text-lg font-bold rounded-2xl bg-primary-green text-white uppercase tracking-wide shadow-lg hover:bg-light-green hover:shadow-xl hover:-translate-y-1 transition-all transform">
-                  Try Again
-                </button>
-              </Link>
-            </div>
-          </div>
+        <div className="flex-grow flex flex-col items-center justify-center px-6 text-center">
+          <div className="w-20 h-20 bg-red-50 text-red-500 rounded-3xl flex items-center justify-center text-3xl mb-6">⚠️</div>
+          <h2 className="text-2xl font-black text-slate-900 mb-2">Analysis Failed</h2>
+          <p className="text-slate-500 max-w-xs mb-8">{error}</p>
+          <Link to="/scan" className="w-full max-w-[280px]">
+            <button className="w-full py-4 bg-slate-900 text-white font-bold rounded-2xl shadow-xl active:scale-95 transition-all">
+              Try Again
+            </button>
+          </Link>
         </div>
       </div>
     )
   }
 
-  if (!result) return null
-
+  // --- SUCCESS STATE ---
   return (
-    <div className="min-h-screen bg-soft-bg font-sans text-dark-text pb-12">
-      {/* Custom Header for Result Page */}
-      <nav className="sticky top-0 z-[60] bg-white shadow-sm px-6 py-4 flex items-center mb-10">
-        <Link to="/scan" className="p-2 text-dark-text hover:text-primary-green transition-colors absolute left-6">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+    <div className="min-h-screen bg-[#fcfdfc] font-sans text-slate-800 flex flex-col items-center pb-12">
+      <nav className="sticky top-0 z-[60] w-full bg-white/80 backdrop-blur-md border-b border-slate-100 px-6 py-4 flex items-center mb-6">
+        <Link to="/scan" className="p-2 text-slate-400 bg-slate-50 rounded-full absolute left-4 hover:text-emerald-600 transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
           </svg>
         </Link>
-        <div className="flex-1 text-center">
-          <span className="text-2xl font-black text-primary-green tracking-tighter">GLENN</span>
+        <div className="flex-1 text-center font-black tracking-tighter text-xl text-slate-900">
+          GLENN<span className="text-emerald-500">.</span>AI
         </div>
       </nav>
 
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="flex flex-col items-center">
-          {/* Main Section: Result Card */}
-          <ResultCard results={result} image={imageUrl} />
-
-          <div className="mt-12 w-full max-w-lg flex flex-col gap-4">
-            <Link to="/scan" className="w-full">
-              <button className="w-full py-4 text-lg font-bold rounded-2xl bg-primary-green text-white uppercase tracking-wide shadow-lg hover:bg-light-green hover:shadow-xl hover:-translate-y-1 transition-all transform">
-                Scan Again
-              </button>
-            </Link>
-            <Link to="/" className="w-full text-center">
-              <button className="w-full py-3 text-base font-semibold text-gray-500 hover:text-primary-green transition-colors">
-                Go Home
-              </button>
-            </Link>
-          </div>
+      <main className="w-full max-w-6xl px-6 flex flex-col items-center">
+        {/* Header Title */}
+        <div className="text-center mb-8">
+            <span className="text-[10px] font-bold text-emerald-600 uppercase tracking-[0.2em] bg-emerald-50 px-3 py-1 rounded-full">Analysis Complete</span>
+            <h2 className="text-3xl font-black text-slate-900 mt-3 tracking-tight">Detection Result</h2>
         </div>
-      </div>
+
+        {/* Main Section: Result Card */}
+        <div className="w-full transform transition-all duration-500 animate-in fade-in slide-in-from-bottom-4">
+          <ResultCard results={result} image={imageUrl} />
+        </div>
+
+        {/* Action Buttons Container */}
+        <div className="mt-10 w-full flex flex-col gap-4">
+          <Link to="/scan" className="w-full">
+            <button className="w-full py-4 text-sm font-black rounded-2xl bg-emerald-600 text-white uppercase tracking-[0.2em] shadow-lg shadow-emerald-200 hover:bg-emerald-700 active:scale-[0.98] transition-all">
+              Scan Another Fruit
+            </button>
+          </Link>
+          
+          <Link to="/" className="w-full">
+            <button className="w-full py-4 text-sm font-bold rounded-2xl bg-white text-slate-500 border-2 border-slate-100 hover:bg-slate-50 active:scale-[0.98] transition-all">
+              Return to Dashboard
+            </button>
+          </Link>
+        </div>
+
+        <p className="mt-8 text-[10px] text-slate-400 font-bold uppercase tracking-widest text-center">
+          Verified by GLENN Neural Engine v3.0
+        </p>
+      </main>
     </div>
   )
 }
