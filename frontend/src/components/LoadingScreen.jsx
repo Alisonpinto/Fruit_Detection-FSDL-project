@@ -26,7 +26,7 @@ const LoadingScreen = () => {
             <div className="text-center space-y-6 max-w-xs">
                 <div>
                     <h2 className="text-3xl font-black text-slate-900 tracking-tighter uppercase">
-                        GLENN<span className="text-emerald-500">.</span>AI
+                        FRUITRA<span className="text-emerald-500">.</span>
                     </h2>
                     <p className="text-[10px] font-bold text-emerald-600 uppercase tracking-[0.3em] mt-1">Neural Engine v3.0</p>
                 </div>

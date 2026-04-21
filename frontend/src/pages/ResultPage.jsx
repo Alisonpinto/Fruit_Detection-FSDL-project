@@ -37,7 +37,11 @@ function ResultPage() {
         }
         setResult(formattedResult)
       } catch (err) {
-        setError(err.message || 'Failed to analyze image. Please try again.')
+        let msg = err.message || 'Failed to analyze image. Please try again.'
+        if (msg.toLowerCase().includes('failed to fetch')) {
+          msg = `Server not reachable. Please ensure your backend is running at http://${window.location.hostname}:5000 and your phone is on the same Wi-Fi.`
+        }
+        setError(msg)
       } finally {
         setLoading(false)
       }
@@ -74,7 +78,7 @@ function ResultPage() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
             </svg>
           </Link>
-          <div className="flex-1 text-center font-black tracking-tighter text-xl">GLENN<span className="text-emerald-500">.</span>AI</div>
+          <div className="flex-1 text-center font-black tracking-tighter text-xl">FRUITRA<span className="text-emerald-500">.</span></div>
         </nav>
 
         <div className="flex-grow flex flex-col items-center justify-center px-6 text-center">
@@ -101,7 +105,7 @@ function ResultPage() {
           </svg>
         </Link>
         <div className="flex-1 text-center font-black tracking-tighter text-xl text-slate-900">
-          GLENN<span className="text-emerald-500">.</span>AI
+          FRUITRA<span className="text-emerald-500">.</span>
         </div>
       </nav>
 
@@ -133,7 +137,7 @@ function ResultPage() {
         </div>
 
         <p className="mt-8 text-[10px] text-slate-400 font-bold uppercase tracking-widest text-center">
-          Verified by GLENN Neural Engine v3.0
+          Verified by Fruitra Engine v3.0
         </p>
       </main>
     </div>

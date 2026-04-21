@@ -96,11 +96,9 @@ function ScanPage() {
   const handleAnalyze = () => {
     if (!imageFile) return
     setIsAnalyzing(true)
-    setTimeout(() => {
-      navigate('/result', {
-        state: { image: imageFile, previewUrl: previewUrl }
-      })
-    }, 2500)
+    navigate('/result', {
+      state: { image: imageFile, previewUrl: previewUrl }
+    })
   }
 
   return (
@@ -115,7 +113,7 @@ function ScanPage() {
           </svg>
         </Link>
         <div className="flex-1 text-center">
-          <span className="text-xl font-black text-slate-900 tracking-tighter">GLENN<span className="text-emerald-500">.</span>AI</span>
+          <span className="text-xl font-black text-slate-900 tracking-tighter">FRUITRA<span className="text-emerald-500">.</span></span>
         </div>
       </nav>
 

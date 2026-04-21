@@ -37,7 +37,7 @@ def create_app():
 
     @app.route('/')
     def index():
-        return {"status": "GLENN API is running", "model_loaded": app.model is not None}
+        return {"status": "Fruitra API is running", "model_loaded": app.model is not None}
 
     return app
 

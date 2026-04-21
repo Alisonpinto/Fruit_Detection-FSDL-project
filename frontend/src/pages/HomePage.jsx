@@ -1,4 +1,4 @@
-// GLENN Home Page - Modernized UI
+// Fruitra Home Page - Modernized UI
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
 
@@ -68,6 +68,56 @@ function HomePage() {
   </div>
 </section>
 
+          {/* ABOUT & EDUCATION SECTION */}
+          <section className="bg-white rounded-[3rem] p-12 lg:p-20 border border-slate-100 shadow-sm">
+            <div className="flex flex-col lg:flex-row gap-16 items-center">
+              <div className="lg:w-1/2">
+                <span className="text-[10px] font-bold text-emerald-600 uppercase tracking-[0.3em] bg-emerald-50 px-4 py-2 rounded-full">Concept & Impact</span>
+                <h2 className="text-3xl md:text-4xl font-black text-slate-900 mt-6 mb-6 tracking-tight">AI for Global Food Security</h2>
+                <div className="space-y-6 text-slate-500 text-lg leading-relaxed">
+                  <p>
+                    Fruitra is an AI-powered diagnostic tool designed to detect fruit diseases and ripeness levels with high precision. By combining computer vision with agricultural expertise, we provide immediate feedback that helps farmers make critical decisions.
+                  </p>
+                  <p>
+                    Our mission is to reduce post-harvest waste during the critical window between harvest and market. Every fruit saved is an extra meal provided and more income for the farmer.
+                  </p>
+                </div>
+
+                <div className="mt-10 grid grid-cols-2 gap-6">
+                  <div className="flex gap-4 items-start">
+                    <div className="w-10 h-10 bg-orange-100 rounded-xl flex items-center justify-center text-orange-600 font-bold shrink-0">2</div>
+                    <div>
+                      <p className="font-bold text-slate-900">Zero Hunger</p>
+                      <p className="text-xs text-slate-400">Protecting crop yields to ensure food for all.</p>
+                    </div>
+                  </div>
+                  <div className="flex gap-4 items-start">
+                    <div className="w-10 h-10 bg-emerald-100 rounded-xl flex items-center justify-center text-emerald-600 font-bold shrink-0">12</div>
+                    <div>
+                      <p className="font-bold text-slate-900">Sustainable Prod.</p>
+                      <p className="text-xs text-slate-400">Reducing food waste across the supply chain.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="lg:w-1/2 bg-slate-50 rounded-[2.5rem] p-8 relative overflow-hidden">
+                <div className="absolute top-0 right-0 p-8">
+                   <div className="text-6xl opacity-10">📖</div>
+                </div>
+                <h3 className="text-xl font-bold text-slate-900 mb-4">Educational Focus</h3>
+                <p className="text-slate-500 mb-6">We don't just detect; we educate. Every scan provides insights into <span className="font-bold">best practices</span> for storage and handling to maximize fruit shelf-life.</p>
+                <div className="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm flex items-center gap-4">
+                   <div className="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center">💡</div>
+                   <div>
+                      <p className="text-sm font-bold text-slate-900">Farmer Insight</p>
+                      <p className="text-xs text-slate-400">"Recognizing disease early saved 20% of my batch."</p>
+                   </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
           {/* FEATURES GRID */}
           <section>
             <div className="text-center max-w-2xl mx-auto mb-16">
@@ -99,7 +149,7 @@ function HomePage() {
             <div className="lg:w-1/2 p-12 lg:p-20 flex flex-col justify-center bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]">
               <h2 className="text-3xl font-bold text-white mb-6">Empowering the <br/><span className="text-emerald-400 underline decoration-emerald-500/30">Next Harvest</span></h2>
               <p className="text-slate-400 leading-relaxed mb-8 text-lg">
-                GLENN isn't just an app; it's a digital companion. We help you reduce waste by up to 30% by identifying the exact moment of peak ripeness.
+                Fruitra isn't just an app; it's a digital companion. We help you reduce waste by up to 30% by identifying the exact moment of peak ripeness.
               </p>
               <div className="grid grid-cols-2 gap-6 border-t border-slate-800 pt-8">
                 <div>
@@ -132,16 +182,17 @@ function HomePage() {
           <div className="flex flex-col md:flex-row justify-between items-center gap-8 mb-12">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-emerald-600 rounded-xl flex items-center justify-center text-white shadow-lg">🌱</div>
-              <span className="text-xl font-black tracking-tighter text-slate-900">GLENN.</span>
+              <span className="text-xl font-black tracking-tighter text-slate-900">FRUITRA<span className="text-emerald-500">.</span></span>
             </div>
             <div className="flex gap-8 font-medium text-slate-500 text-sm">
               <a href="#" className="hover:text-emerald-600 transition">Privacy</a>
               <a href="#" className="hover:text-emerald-600 transition">Terms</a>
+              <Link to="/developers" className="hover:text-emerald-600 transition">Developers</Link>
               <a href="#" className="hover:text-emerald-600 transition">Support</a>
             </div>
           </div>
           <div className="text-center text-xs text-slate-400 font-medium">
-            © 2026 GLENN Agriculture Systems • Made for a Sustainable Future
+            © 2026 Fruitra Systems • Made for a Sustainable Future
           </div>
         </div>
       </footer>

@@ -15,7 +15,7 @@ function Header() {
           </svg>
         </div>
         <span className="text-xl font-black text-slate-900 tracking-tighter">
-          GLENN<span className="text-emerald-500">.</span>AI
+          FRUITRA<span className="text-emerald-500">.</span>
         </span>
       </Link>
 
@@ -58,6 +58,13 @@ function Header() {
             onClick={() => setIsMenuOpen(false)}
           >
             Past Results
+          </Link>
+          <Link 
+            to="/developers" 
+            className="text-sm font-black uppercase tracking-widest text-slate-900 hover:text-emerald-600 transition-colors" 
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Developers
           </Link>
           
           <div className="w-full px-10">

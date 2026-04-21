@@ -5,7 +5,7 @@
  * Currently using dummy data, will integrate with backend later
  */
 
-const API_BASE_URL = 'http://localhost:5000' // Backend URL
+const API_BASE_URL = `http://${window.location.hostname}:5000` // Backend URL
 
 /**
  * Upload image and get fruit detection results
