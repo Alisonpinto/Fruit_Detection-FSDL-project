@@ -6,17 +6,17 @@ function DevelopersPage() {
   const developers = [
     {
       name: "Alison Pinto",
-      role: "Founder & Project Lead",
-      bio: "Visionary developer focused on bridging the gap between advanced AI and practical agricultural solutions.",
-      image: "/alison_avatar.png", // I will copy the generated image to public/alison_avatar.png
+      role: "UI/UI Designer and Developer",
+      bio: "A developer with a passion for creating beautiful and user-friendly interfaces.",
+      image: "/alisonpinto.jpg", 
       color: "bg-emerald-50",
       textColor: "text-emerald-600"
     },
     {
       name: "Glenn Pinto",
-      role: "Lead Researcher",
-      bio: "Specialist in computer vision and neural networks, dedicated to improving crop yield through data-driven insights.",
-      image: "/glenn_avatar.png", // I will copy the generated image to public/glenn_avatar.png
+      role: "ML Trainer and Developer",
+      bio: "A developer with a passion for building intelligent systems.",
+      image: "/glenn.jpeg", 
       color: "bg-blue-50",
       textColor: "text-blue-600"
     }
