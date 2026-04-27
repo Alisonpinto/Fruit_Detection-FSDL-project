@@ -11,7 +11,7 @@ predict_bp = Blueprint('predict', __name__)
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'webp'}
 
 # Mapping of class indices to readable fruit names (Alphabetical order from ImageDataGenerator)
-CLASS_NAMES = ["Lime_Bad", "Lime_Good", "Banana_Bad", "Banana_Good"]
+CLASS_NAMES = ["Banana_Good", "Lime_Good", "Banana_Bad", "Lime_Bad"]
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -80,6 +80,3 @@ def predict():
             "error": "Internal processing error",
             "message": str(e)
         }), 500
-
-
-
