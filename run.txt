@@ -1,0 +1,17 @@
+# Navigate to the backend directory
+cd backend
+
+# Activate the virtual environment
+.\venv\Scripts\activate
+
+# Run the application
+python app.py
+---------------------------
+# Navigate to the frontend directory
+cd frontend
+
+# Install dependencies (if you haven't already)
+npm install
+
+# Start the development server
+npm run dev
