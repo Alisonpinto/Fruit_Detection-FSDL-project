@@ -7,6 +7,7 @@ cd backend
 # Run the application
 python app.py
 ---------------------------
+
 # Navigate to the frontend directory
 cd frontend
 

@@ -11,7 +11,7 @@ predict_bp = Blueprint('predict', __name__)
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'webp'}
 
 # Mapping of class indices to readable fruit names (Alphabetical order from ImageDataGenerator)
-CLASS_NAMES = ["Banana_Good", "Lime_Good", "Banana_Bad", "Lime_Bad"]
+CLASS_NAMES = ["Banana_Bad", "Banana_Good", "Lime_Bad", "Lime_Good"]
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -52,7 +52,6 @@ def predict():
         img = Image.open(file.stream).convert('RGB')
         img = img.resize(target_size)
         img_array = img_to_array(img)
-        # We removed manual / 255.0 because the model has a built-in rescaling_1 layer (scale=0.00392)
         img_array = np.expand_dims(img_array, axis=0)
 
 

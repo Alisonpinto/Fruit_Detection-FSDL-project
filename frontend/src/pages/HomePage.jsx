@@ -27,7 +27,7 @@ function HomePage() {
       <div className="absolute -inset-1 bg-gradient-to-tr from-emerald-200 to-teal-100 rounded-[2rem] blur-xl opacity-40" />
       
       <img
-        src="https://images.unsplash.com/photo-1598514983318-2f64f8f4796c?q=80&w=2069&auto=format&fit=crop"
+        src="\public\hero_img.png"
         alt="Farmer harvesting"
         className="relative rounded-[2rem] shadow-2xl w-full h-[220px] xs:h-[260px] lg:h-[500px] object-cover border-[6px] border-white"
       />
